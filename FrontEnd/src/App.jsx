@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/shared/Navbar";
 import Login from "./components/auth/Login";
-import Signup from "./components/auth/SIgnup";
 import Home from "./components/Home";
 import Jobs from "./components/Jobs";
 import Browse from "./components/Browse";
@@ -14,8 +13,8 @@ import AdminJobs from "./components/Admin/AdminJobs";
 import PostJobs from "./components/Admin/PostJobs";
 import Applicants from "./components/Admin/Applicants";
 import ProtectedAdminRoute from "./components/Admin/ProtectedAdminRoutes";
-
 import OpeneningPage from "./components/OpeneningPage";
+import Signup from "./components/auth/SIgnup";
 
 const appRouter = createBrowserRouter([
   {
@@ -32,7 +31,7 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/signup",
-    element:<Signup />
+    element:<Signup/>
   },
   {
     path: "/jobs",
