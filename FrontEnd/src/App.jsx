@@ -14,7 +14,7 @@ import PostJobs from "./components/Admin/PostJobs";
 import Applicants from "./components/Admin/Applicants";
 import ProtectedAdminRoute from "./components/Admin/ProtectedAdminRoutes";
 import OpeneningPage from "./components/OpeneningPage";
-import Signup from "./components/auth/SIgnup";
+import Signup from "./components/auth/Signup";
 
 const appRouter = createBrowserRouter([
   {
