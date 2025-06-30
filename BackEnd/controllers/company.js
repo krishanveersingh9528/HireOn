@@ -88,7 +88,7 @@ export const updateCompany=async (req,res)=>{
        const file=req.file;
        //cloudinary
          const fileuri=getDataUri(file);
-          const cloudresponse = await cloudinary.uploader.upload(fileuri.content);
+          const cloudresponse = await cloudinary.uploader.upload(fileuri.content,{ resource_type: "raw" });
 
             const logo=cloudresponse.secure_url;
        const updatedata={name,description,website,location,logo};

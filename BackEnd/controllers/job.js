@@ -45,31 +45,37 @@ export const PostJob = async (req, res) => {
 
 //student
 export const getAlljobs = async (req, res) => {
-    try {
-        const keyword = req.query.keyword || "";
-        const query = {
-            $or: [
-                { title: { $regex: keyword, $options: "i" } },
-                { description: { $regex: keyword, $options: "i" } }
-            ]
-        }
-        const jobs = await Job.find(query).populate("company").sort({ createdAt: -1 });
-        if (!jobs) {
-            return res.status(404).json({
-                message: "jobs not found",
-                success: false
-            })
-        }
-        return res.status(200).json({
-            jobs,
-            success: true
-        })
+  try {
+    const keyword = req.query.keyword?.trim() || "";
 
-    } catch (err) {
-        console.log(err);
+    // Fetch all jobs with company populated
+    let jobs = await Job.find().populate("company").sort({ createdAt: -1 });
+
+    if (!jobs || jobs.length === 0) {
+      return res.status(404).json({
+        message: "No jobs found",
+        success: false
+      });
     }
-}
 
+    // Filter jobs based on keyword in title, description, or company name
+    if (keyword) {
+      const keywordLower = keyword.toLowerCase();
+      jobs = jobs.filter((job) =>
+        job.title.toLowerCase().includes(keywordLower) ||
+        job.description.toLowerCase().includes(keywordLower) ||
+        (job.company?.name?.toLowerCase().includes(keywordLower)) // assumes 'name' field in company model
+      );
+    }
+
+    return res.status(200).json({
+      jobs,
+      success: true
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 //student
 export const getJobbyid = async (req, res) => {
     try {
