@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion'; // ✅ Import Framer Motion
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const shortlistingStatus = ["Accepted", "Rejected"];
 
@@ -13,7 +14,7 @@ const ApplicantsTable = () => {
 
     const statusHandler = async (status, id) => {
         try {
-            const res = await axios.post(`http://localhost:8000/api/v1/application/status/${id}/update`, { status }, {
+            const res = await axios.post(`${backendURL}/api/v1/application/status/${id}/update`, { status }, {
                 withCredentials: true
             });
             if (res.data.success) {

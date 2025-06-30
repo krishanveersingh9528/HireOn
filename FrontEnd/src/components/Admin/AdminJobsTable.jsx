@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Edit2, Eye, MoreHorizontal, View } from 'lucide-react'
+import {Eye, MoreHorizontal, View } from 'lucide-react'
 import { useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion' // ✅ Added motion
 
 const AdminJobsTable = () => {

@@ -1,4 +1,3 @@
-
 import Navbar from './shared/Navbar'
 import FilterPage from './FilterPage'
 import Job from './Job'

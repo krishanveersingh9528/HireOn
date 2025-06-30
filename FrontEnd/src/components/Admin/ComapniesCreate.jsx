@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { useDispatch } from 'react-redux';
 import { setSingleCompany } from '../../redux/companySlice';
 import { motion } from 'framer-motion'; // ✅ Framer Motion added
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const CompanyCreate = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const CompanyCreate = () => {
   const registernewCompany = async () => {
     try {
       const res = await axios.post(
-        'http://localhost:8000/api/v1/company/register',
+        `${backendURL}/api/v1/company/register`,
         { companyName },
         {
           headers: {

@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllApplicants } from '../../redux/application';
 import { motion } from 'framer-motion'; // ✅ added
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const Applicants = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const Applicants = () => {
     const fetchAllApplicants = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/v1/application/${id}/applicants`,
+          `${backendURL}/api/v1/application/${id}/applicants`,
           {
             withCredentials: true,
           }

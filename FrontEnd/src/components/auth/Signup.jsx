@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '../../redux/authslice';
 import { Loader } from 'lucide-react';
 import { motion } from 'framer-motion';
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const Signup = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:8000/api/v1/user/register', formData, {
+      const res = await axios.post(`${backendURL}/api/v1/user/register`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

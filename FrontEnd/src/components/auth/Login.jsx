@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLoading, setUser } from '../../redux/authslice';
 import { Loader } from 'lucide-react';
 import { motion } from 'framer-motion';
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     dispatch(setLoading(true));
     try {
-      const res = await axios.post('http://localhost:8000/api/v1/user/login', input, {
+      const res = await axios.post(`${backendURL}/api/v1/user/login`, input, {
         headers: {
           'Content-Type': 'application/json',
         },

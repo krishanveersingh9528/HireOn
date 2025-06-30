@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const JobDescription = () => {
 
@@ -21,7 +22,7 @@ const JobDescription = () => {
     const [isApplied, setIsApplied] = useState(isInitaillyApplied)
     const applyJobHandler = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/api/v1/application/apply/${jobid}`, { withCredentials: true })
+            const res = await axios.get(`${backendURL}/api/v1/application/apply/${jobid}`, { withCredentials: true })
             if (res.data.success) {
                 setIsApplied(true)
                 const updatesingleJob = { ...singleJob, applications: [...singleJob.applications, { applicant: user?._id }] }

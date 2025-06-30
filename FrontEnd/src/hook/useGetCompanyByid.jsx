@@ -3,6 +3,8 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setAllJobs } from '../redux/jobSlice'
 import { setSingleCompany } from '../redux/companySlice'
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 
 const useGetCompanyByid = (companyID) => {
     const dispatch=useDispatch() 
@@ -10,7 +12,7 @@ const useGetCompanyByid = (companyID) => {
      useEffect(  ()=>{
          const fetchSingleCompany=async()=>{
             try {
-                const res=await axios.get(`http://localhost:8000/api/v1/company/get/${companyID}`,{withCredentials:true})
+                const res=await axios.get(`${backendURL}/api/v1/company/get/${companyID}`,{withCredentials:true})
               
                 if(res.data.success){
                     // console.log(res.data.company)

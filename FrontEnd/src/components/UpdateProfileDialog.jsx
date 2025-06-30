@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import{ useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -13,7 +13,8 @@ import { Loader2 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import axios from 'axios';
-import { setUser } from '../redux/authSlice';
+import { setUser } from '../redux/authslice';
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const UpdateProfileDialog = ({ open, setOpen }) => {
   const [loading, setLoading] = useState(false);
@@ -55,7 +56,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     try {
       setLoading(true);
       const res = await axios.post(
-        'http://localhost:8000/api/v1/user/profile/update',
+        `${backendURL}/api/v1/user/profile/update`,
         formData,
         {
           headers: {

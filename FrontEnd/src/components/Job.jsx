@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from './ui/button';
 import { Bookmark } from 'lucide-react';
 import { Badge } from './ui/badge';

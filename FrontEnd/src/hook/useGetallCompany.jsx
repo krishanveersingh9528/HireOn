@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setCompanies } from '../redux/companySlice'
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 
 const useGetallCompany = () => {
     const dispatch=useDispatch() 
@@ -9,7 +11,7 @@ const useGetallCompany = () => {
      useEffect(  ()=>{
          const fetchCompany=async()=>{
             try {
-                const res=await axios.get('http://localhost:8000/api/v1/company/get',{withCredentials:true})
+                const res=await axios.get(`${backendURL}/api/v1/company/get`,{withCredentials:true})
                  
                 if(res.data.success){
                     console.log(res.data.companies)

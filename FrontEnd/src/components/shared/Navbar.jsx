@@ -2,20 +2,21 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover'
 import { Button } from '../ui/button'
-
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 import { Avatar, AvatarImage } from '../ui/avatar'
 import { LogOut, User2 } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'sonner'
 import axios from 'axios'
 import { setUser } from '../../redux/authslice'
+
 const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { user } = useSelector(store => store.auth)
     const logoutHandler = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/v1/user/logout", { withCredentials: true })
+            const res = await axios.get(`${backendURL}/api/v1/user/logout`, { withCredentials: true })
             if (res.data.success) {
                 dispatch(setUser(null));
                 navigate("/home")

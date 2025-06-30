@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../shared/Navbar';
 import { Button } from '../ui/button';
 import { ArrowLeft, Loader } from 'lucide-react';
@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import useGetCompanyByid from '../../hook/useGetCompanyByid';
 import { motion } from 'framer-motion'; // ✅ Import framer-motion
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const CompanySetup = () => {
   const { id } = useParams();
@@ -52,7 +53,7 @@ const CompanySetup = () => {
     try {
       setLoading(true);
       const res = await axios.put(
-        `http://localhost:8000/api/v1/company/update/${id}`,
+        `${backendURL}/api/v1/company/update/${id}`,
         formData,
         {
           headers: {

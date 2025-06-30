@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { Loader } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion'; // ✅ Import Framer Motion
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const PostJobs = () => {
   const [input, setInput] = useState({
@@ -47,7 +48,7 @@ const PostJobs = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/job/post", input, {
+      const res = await axios.post(`${backendURL}/api/v1/job/post`, input, {
         headers: {
           "Content-Type": "application/json"
         },

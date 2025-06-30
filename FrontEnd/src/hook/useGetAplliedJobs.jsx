@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setAllAppliedJobs } from '../redux/jobSlice';
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 
 const useGetAppliedJobs = () => {
     const dispatch = useDispatch();
@@ -9,7 +11,7 @@ const useGetAppliedJobs = () => {
     useEffect(() => {
         const getAppliedJobs = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/api/v1/application/get", {
+                const res = await axios.get(`${backendURL}/api/v1/application/get`, {
                     withCredentials: true
                 });
                 if (res.data.success) {
