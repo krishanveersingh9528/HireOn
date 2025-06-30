@@ -19,7 +19,7 @@ export const register = async (req, res) => {
     }
     const file = req.file;
     const fileuri = getDataUri(file);
-      const cloudresponse = await cloudinary.uploader.upload(fileUri.content, { resource_type: "raw" });
+      const cloudresponse = await cloudinary.uploader.upload(fileuri.content, { resource_type: "raw" });
 
 
 
@@ -102,7 +102,7 @@ export const login = async (req, res) => {
       profile: user.profile
     }
 
-    return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' }).json({
+    return res.status(200).cookie("token", token, { maxAge:  60 * 60 * 1000, httpOnly: true, sameSite: 'None',secure:true }).json({
       message: `welcome back ${user.fullname}`,
       user,
       success: true
