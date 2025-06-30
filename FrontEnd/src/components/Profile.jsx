@@ -9,6 +9,7 @@ import AppliedJobs from './AppliedJobs';
 import UpdateProfileDialog from './UpdateProfileDialog';
 import { useSelector } from 'react-redux';
 import useGetAppliedJobs from '../hook/useGetAplliedJobs';
+import { motion } from 'framer-motion';
 
 const isresume = true;
 
@@ -18,7 +19,9 @@ const Profile = () => {
   const { user } = useSelector((store) => store.auth);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-slate-50 to-slate-100">
+    <motion.div initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }} className="min-h-screen bg-gradient-to-br from-white via-slate-50 to-slate-100">
       <Navbar />
 
       <div className="max-w-4xl mx-auto border border-slate-200 bg-white shadow-md rounded-2xl my-8 p-8">
@@ -71,18 +74,21 @@ const Profile = () => {
 
         <div className="my-6">
           <Label className="text-md font-bold text-slate-700 mb-1 block">Resume</Label>
-          {isresume ? (
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={user?.profile?.resume}
-              className="text-sky-600 hover:underline break-all"
-            >
-              {user?.profile?.resumeOriginalName}
-            </a>
-          ) : (
-            <span className="text-gray-500">NA</span>
-          )}
+          {
+            isresume ? (
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://docs.google.com/gview?url=${encodeURIComponent(user?.profile?.resume)}&embedded=true`}
+                className="text-blue-500 hover:underline cursor-pointer"
+              >
+                {user?.profile?.resumeOriginalName}
+              </a>
+            ) : (
+              <span>NA</span>
+            )
+          }
+
         </div>
       </div>
 
@@ -92,7 +98,7 @@ const Profile = () => {
       </div>
 
       <UpdateProfileDialog open={open} setOpen={setOpen} />
-    </div>
+    </motion.div>
   );
 };
 

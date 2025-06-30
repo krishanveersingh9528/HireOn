@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import useGetCompanyByid from '../../hook/useGetCompanyByid';
+import { motion } from 'framer-motion'; // ✅ Import framer-motion
 
 const CompanySetup = () => {
   const { id } = useParams();
@@ -79,13 +80,17 @@ const CompanySetup = () => {
         description: singleCompany.description || '',
         website: singleCompany.website || '',
         location: singleCompany.location || '',
-        file: singleCompany.logo || null, // string here, will skip upload unless user changes it
+        file: singleCompany.logo || null,
       });
     }
   }, [singleCompany]);
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Navbar />
       <div className="max-w-xl mx-auto my-10">
         <form onSubmit={submitHandler}>
@@ -170,7 +175,7 @@ const CompanySetup = () => {
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

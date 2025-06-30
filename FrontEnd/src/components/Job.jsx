@@ -4,6 +4,7 @@ import { Bookmark } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { AvatarImage, Avatar } from './ui/avatar';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // ✅ import
 
 const Job = ({ job }) => {
   const jobid = job?._id;
@@ -18,7 +19,12 @@ const Job = ({ job }) => {
   };
 
   return (
-    <div className="p-5 rounded-xl shadow-md bg-gradient-to-br from-white via-slate-50 to-slate-100 border border-slate-200 hover:shadow-lg transition">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+      className="p-5 rounded-xl shadow-md bg-gradient-to-br from-white via-slate-50 to-slate-100 border border-slate-200 hover:shadow-lg transition"
+    >
       <div className="flex items-center justify-between">
         <p className="text-sm text-gray-600">{daysAgoFunction(job?.createdAt)}</p>
         <Button variant="outline" className="rounded-full" size="icon">
@@ -61,7 +67,7 @@ const Job = ({ job }) => {
           Details
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '../../redux/authslice';
 import { Loader } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -73,7 +74,9 @@ const Signup = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <motion.div  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }} className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto">
         <form
@@ -187,7 +190,7 @@ const Signup = () => {
           </p>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

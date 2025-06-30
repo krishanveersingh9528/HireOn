@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllApplicants } from '../../redux/application';
+import { motion } from 'framer-motion'; // ✅ added
 
 const Applicants = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,11 @@ const Applicants = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <Navbar />
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-xl font-bold my-5 text-blue-600">
@@ -40,7 +45,7 @@ const Applicants = () => {
         </h1>
         <ApplicantsTable />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

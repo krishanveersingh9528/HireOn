@@ -7,6 +7,7 @@ import useGetAllAdminJobs from '../../hook/useGetAllAdminJobs';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setSearchJobByText } from '../../redux/jobSlice';
+import { motion } from 'framer-motion'; // ✅ Add this
 
 const AdminJobs = () => {
   const [input, setInput] = useState('');
@@ -20,7 +21,12 @@ const AdminJobs = () => {
   }, [input, dispatch]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gray-50"
+    >
       <Navbar />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -41,7 +47,7 @@ const AdminJobs = () => {
 
         <AdminJobsTable />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

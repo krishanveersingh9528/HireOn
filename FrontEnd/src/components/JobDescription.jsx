@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const JobDescription = () => {
 
@@ -48,7 +49,9 @@ const JobDescription = () => {
         getsingleJob()
     }, [jobid, dispatch, user?._id])
     return (
-        <div className='max-w-7xl mx-auto my-10   p-5 rounded-md shadow-xl bg-white-border border-gray-100'>
+        <motion.div initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }} className='max-w-7xl mx-auto my-10  p-5 rounded-md shadow-xl bg-white-border border-gray-100'>
             <div className='flex items-center justify-between'>
                 <div>
                     <h1 className='font-bold text-xl'>{singleJob?.title}</h1>
@@ -75,7 +78,7 @@ const JobDescription = () => {
 
 
             </div>
-        </div>
+        </motion.div>
     )
 }
 

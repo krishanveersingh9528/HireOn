@@ -11,6 +11,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   const searchJobHandler = () => {
+    if (query.trim() === '') return; // Optional: prevent empty search
     dispatch(setSearchedQuery(query));
     navigate('/browse');
   };
@@ -40,13 +41,19 @@ const HeroSection = () => {
         <div className="flex w-full max-w-xl shadow-md border border-gray-300 pl-3 rounded-full items-center gap-4 mx-auto bg-white">
           <input
             type="text"
+            value={query}
             placeholder="Find Your Dream Jobs"
             onChange={(e) => SetQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                searchJobHandler();
+              }
+            }}
             className="outline-none border-none w-full bg-transparent text-gray-700 placeholder-gray-400"
           />
           <Button
             onClick={searchJobHandler}
-            className="rounded-r-full bg-blue-500 hover:bg-blue-600 transition-colors"
+            className="rounded-r-full bg-blue-500 hover:bg-blue-600 transition-colors cursor-pointer"
           >
             <Search className="h-5 w-5" />
           </Button>

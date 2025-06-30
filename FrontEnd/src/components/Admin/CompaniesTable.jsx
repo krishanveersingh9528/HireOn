@@ -13,6 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Edit2, MoreHorizontal } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // ✅ Import Framer Motion
 
 const CompaniesTable = () => {
   const navigate = useNavigate();
@@ -48,8 +49,13 @@ const CompaniesTable = () => {
               </TableCell>
             </TableRow>
           ) : (
-            filteredCompanies.map((company) => (
-              <TableRow key={company._id}>
+            filteredCompanies.map((company, index) => (
+              <motion.tr
+                key={company._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+              >
                 <TableCell>
                   <Avatar>
                     <AvatarImage src={company?.logo} />
@@ -73,7 +79,7 @@ const CompaniesTable = () => {
                     </PopoverContent>
                   </Popover>
                 </TableCell>
-              </TableRow>
+              </motion.tr>
             ))
           )}
         </TableBody>

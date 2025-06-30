@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading, setUser } from '../../redux/authslice';
 import { Loader } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -50,14 +51,17 @@ const Login = () => {
 
   useEffect(() => {
     if (user) navigate('/home');
-  }, []);
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto">
-        <form
+        <motion.form
           onSubmit={submitHandler}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="w-full md:w-1/2 bg-white border border-gray-200 rounded-2xl shadow-md p-8 my-10"
         >
           <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">Login</h1>
@@ -131,7 +135,7 @@ const Login = () => {
               Sign Up
             </Link>
           </p>
-        </form>
+        </motion.form>
       </div>
     </div>
   );
