@@ -13,6 +13,8 @@ const useGetAllAdminJobs = () => {
             try {
                 const res=await axios.get(`${backendURL}/api/v1/job/getadminJobs`,{withCredentials:true})
                if(res.data.success){
+                //set admin jobs in redux
+                // console.log(res.data.jobs)
                 dispatch(setAllAdminJobs(res.data.jobs))
                }
             } catch (error) {

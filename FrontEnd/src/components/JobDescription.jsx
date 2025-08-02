@@ -1,4 +1,3 @@
-import React from 'react'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import { useParams } from 'react-router-dom';
@@ -38,7 +37,7 @@ const JobDescription = () => {
     useEffect(() => {
         const getsingleJob = async () => {
             try {
-                const res = await axios.get(`http://localhost:8000/api/v1/job/get/${jobid}`, { withCredentials: true })
+                const res = await axios.get(`${backendURL}/api/v1/job/get/${jobid}`, { withCredentials: true })
                 if (res.data.success) {
                     dispatch(setSingleJob(res.data.job))
                     setIsApplied(res.data.job.applications.some((item) => item.applicant === user?._id))
