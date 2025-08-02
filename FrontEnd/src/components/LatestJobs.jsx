@@ -1,8 +1,25 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import LatestJobCards from './LatestJobCards';
-import { useSelector } from 'react-redux';
+
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const LatestJobs = () => {
-  const { allJobs } = useSelector((store) => store.job);
+  const [latestJobs, setLatestJobs] = useState([]);
+
+  useEffect(() => {
+    const fetchLatestJobs = async () => {
+      try {
+        const res = await axios.get(`${backendURL}/api/v1/job/get`, { withCredentials: true });
+        if (res.data.success) {
+          setLatestJobs(res.data.jobs.slice(0, 6)); // ✅ Always take only latest 6
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchLatestJobs();
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-white via-slate-50 to-blue-100 border border-slate-200 rounded-3xl mx-4 md:mx-16 shadow-lg p-6 mt-10">
@@ -11,12 +28,12 @@ const LatestJobs = () => {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {allJobs.length <= 0 ? (
+        {latestJobs.length <= 0 ? (
           <span className="text-center col-span-full text-gray-500">
             No Job Available
           </span>
         ) : (
-          allJobs.slice(0, 6).map((job) => <LatestJobCards key={job._id} job={job} />)
+          latestJobs.map((job) => <LatestJobCards key={job._id} job={job} />)
         )}
       </div>
     </div>
