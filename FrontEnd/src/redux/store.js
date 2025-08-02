@@ -10,8 +10,8 @@ import {
     PERSIST,
     PURGE,
     REGISTER,
-} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import companySlice from "./companySlice";
 import applicationSlice from "./application";
 
@@ -19,17 +19,16 @@ const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-}
+};
 
 const rootReducer = combineReducers({
-    auth:authSlice,
-    job:jobSlice,
-    company:companySlice,
-    application:applicationSlice
-})
+    auth: authSlice,
+    job: jobSlice,
+    company: companySlice,
+    application: applicationSlice
+});
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
     reducer: persistedReducer,
@@ -40,4 +39,9 @@ const store = configureStore({
             },
         }),
 });
+
+// ✅ Create persistor here
+export const persistor = persistStore(store);
+
+// ✅ Export both store & persistor
 export default store;
