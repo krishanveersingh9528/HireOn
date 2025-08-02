@@ -50,8 +50,19 @@ const Home = () => {
       >
         <LatestJobs />
       </motion.div>
-
-      <Footer />
+        
+        <motion.div
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+    <Footer />
+      </motion.div>
+       
+        
+     
+      
     </div>
   );
 };

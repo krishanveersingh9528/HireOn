@@ -7,7 +7,7 @@ import { setSearchedQuery } from '../redux/jobSlice'
 const filterData = [
   {
     filterType: "Location",
-    array: ["Delhi NCR", "Mumbai", "Bangalore", "Hyderabad", "Pune"]
+    array: ["Delhi NCR", "Mumbai", "Banglore", "Hyderabad", "Pune"]
   },
   {
     filterType: "Industry",

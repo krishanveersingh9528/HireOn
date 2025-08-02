@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import useGetAllJobs from '../hook/useGetAllJobs';
 
 const Jobs = () => {
-  // ✅ Always fetch ALL jobs (no search filter)
   useGetAllJobs("");  
 
   const { allJobs, searchedQuery } = useSelector(store => store.job);
@@ -35,7 +34,22 @@ const Jobs = () => {
           <div className='w-20%'>
             <FilterPage />
           </div>
-          {filterJobs.length <= 0 ? <span>Job Not Found</span> : (
+
+          {filterJobs.length <= 0 ? (
+            <div className="flex-1 flex flex-col items-center justify-center h-[88vh]">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/4076/4076508.png"
+                alt="No jobs found"
+                className="w-28 h-28 mb-4 opacity-80"
+              />
+              <h2 className="text-2xl font-bold text-gray-700">
+                No Jobs Found
+              </h2>
+              <p className="text-gray-500 mt-1 text-center">
+                Try adjusting your filters or check back later.
+              </p>
+            </div>
+          ) : (
             <div className='flex-1 h-[88vh] overflow-y-auto pb-5'>
               <div className='grid grid-cols-3 gap-4'>
                 {filterJobs.map((job) => (
