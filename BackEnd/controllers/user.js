@@ -114,14 +114,23 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    return res.status(200).cookie("token", "", { maxAge: 0 }).json({
-      message: "Logout successfully",
-      success: true
-    })
+    return res
+      .status(200)
+      .cookie("token", "", {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+        expires: new Date(0),   // ✅ clear immediately
+      })
+      .json({
+        message: "Logout successfully",
+        success: true,
+      });
   } catch (err) {
     console.log(err);
   }
-}
+};
+
 
 export const updateProfile = async (req, res) => {
   try {
